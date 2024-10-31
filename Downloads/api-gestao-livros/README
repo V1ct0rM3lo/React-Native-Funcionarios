@@ -1,0 +1,47 @@
+## PASSO A PASSO PARA O DESENVOLVIMENTO DA API
+
+Vamos desenvolver uma API RESTful em Node.js que permite aos usuários se cadastrarem, façam login, e gerenciem um sistema de livros (incluir, alterar, consultar e excluir). Utilizaremos JSON Web Tokens (JWT) para autenticação, e Sequelize para interação com o banco de dados MySQL.
+
+### Configurar a aplicação
+
+Crie uma pasta chamada node-api. Abra essa pasta no VsCode e inicie o Terminal. Execute o seguinte comando para iniciarmos nossa aplicação em Node:
+
+`npm init -y`
+
+Ainda no terminal, vamos instalar as dependências necessárias para o projeto, executando o seguinte comando:
+
+`npm install express mysql2 sequelize jsonwebtoken bcryptjs body-parser dotenv`
+
+1.	express: é um framework para Node.js, utilizado para construir aplicações web e APIs. Ele facilita o gerenciamento de rotas, requisições e respostas HTTP, além de permitir a integração de middlewares para estender as funcionalidades da aplicação.
+2.	mysql2: O mysql2 é um cliente MySQL para Node.js, que permite a conexão e execução de queries em um banco de dados MySQL. Ele é semelhante ao pacote mysql, mas oferece melhorias de performance e suporte para Promises e async/await.
+3.	sequelize:
+o	O Sequelize é um ORM (Object-Relational Mapping) para Node.js, que abstrai as interações com o banco de dados, permitindo que você manipule os dados através de objetos JavaScript em vez de escrever queries SQL diretamente. Ele suporta múltiplos bancos de dados, incluindo MySQL, PostgreSQL, SQLite e MSSQL.
+4.	jsonwebtoken:
+o	O jsonwebtoken é uma biblioteca para criar, assinar e verificar tokens JWT (JSON Web Tokens). JWTs são usados para autenticação, permitindo que você proteja rotas em sua aplicação, garantindo que apenas usuários autenticados possam acessá-las.
+5.	bcryptjs:
+o	O bcryptjs é uma biblioteca para hashing de senhas. Ele permite que você crie hashes seguros para senhas de usuários, tornando-as mais difíceis de serem quebradas em caso de vazamento de dados. Além disso, bcryptjs também oferece funções para comparar senhas fornecidas com seus hashes correspondentes.
+6.	body-parser:
+o	O body-parser é um middleware que permite extrair dados do corpo de uma requisição HTTP. Ele é utilizado para processar e converter os dados de requisições POST e PUT em objetos JavaScript que podem ser facilmente manipulados na sua aplicação. Ele suporta diferentes tipos de dados, como JSON e URL-encoded.
+7.	dotenv:
+o	O dotenv é uma biblioteca que carrega variáveis de ambiente a partir de um arquivo .env para dentro do process.env da sua aplicação. Isso permite que você separe as configurações sensíveis ou específicas do ambiente (como credenciais de banco de dados ou chaves secretas) do código-fonte, facilitando a configuração de diferentes ambientes (desenvolvimento, teste, produção).
+
+Vamos instalar também o nodemon na aplicação para habilitar o HotReload, ou seja, com ele não é necessário reiniciar a aplicação a cada alteração realizada no código:
+
+`npm install --save-dev nodemon`
+
+Para habilitar o nodemon na aplicação, insira o trecho de código abaixo no arquivo package.json:
+
+![alt text](image-1.png)
+
+### Desenvolvimento da aplicação
+
+1.  Configurar o arquivo .env
+2.  Criar uma pasta na raiz do projeto chamada models. Nessa pasta serão definidas as estruturas das tabelas do banco de dados. 
+3.  Criar uma pasta config e dentro dela um arquivo database.js para configurar o sequelize
+4.  Criar uma pasta chamada middleware e adicione o arquivo auth.js: Um middleware é uma ou várias funções em frameworks de servidor como Express, que tem acesso ao objeto de requisição (req), ao objeto de resposta (res) e à função next() no ciclo de requisição-resposta. A função middleware pode executar qualquer operação, como modificar objetos de requisição e resposta, finalizar o ciclo de requisição-resposta, ou chamar a próxima função middleware na pilha. 
+5.  Criar uma pasta chamada services. O services tem por objetivo desacoplar o código para tornar a aplicação mais modular, fácil de manter e testar. Ao criar uma camada de serviços, você separa a lógica de negócios das rotas e do controle HTTP, mantendo o código mais organizado.
+6.  Criar o arquivo index.js, na pasta raiz da aplicação, para a inicialização da API.
+
+### Iniciar a aplicação
+
+`npm start`
